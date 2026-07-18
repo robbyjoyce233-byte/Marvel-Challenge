@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#ed1d24">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Marvel Challenge">
+<title>MARVEL CHALLENGE</title>
+<style>
+/* =========================================================
+   MARVEL CHALLENGE - style.css
+   Thème rouge / noir / blanc, mobile-first
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --marvel-red: #ed1d24;
+  --marvel-red-dark: #a3141a;
+  --marvel-black: #0b0b0d;
+  --marvel-black-2: #161618;
+  --marvel-white: #f5f5f5;
+  --marvel-gray: #8a8a8f;
+  --success: #2ecc71;
+  --warning: #f5a623;
+  --danger: #ff4757;
+}
+
+html, body {
+  height: 100%;
+  background: var(--marvel-black);
+  color: var(--marvel-white);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% 0%, #2a0508 0%, var(--marvel-black) 60%);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ---------- ÉCRANS ---------- */
+.screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 20px 40px;
+  min-height: 100vh;
+  animation: fadeIn 0.35s ease;
+}
+
+.screen.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- MENU ---------- */
+.stripe-top {
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--marvel-red), var(--marvel-red-dark), var(--marvel-red));
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.logo {
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.logo-marvel {
+  display: block;
+  font-size: 2.6rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--marvel-red);
+  text-shadow: 0 0 18px rgba(237, 29, 36, 0.55);
+  font-style: italic;
+}
+
+.logo-challenge {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 6px;
+  color: var(--marvel-white);
+  margin-top: 4px;
+}
+
+.tagline {
+  text-align: center;
+  color: var(--marvel-gray);
+  font-size: 0.95rem;
+  margin: 10px 0 20px;
+}
+
+.best-score-box {
+  width: 100%;
+  background: var(--marvel-black-2);
+  border: 1px solid rgba(237, 29, 36, 0.35);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 26px;
+}
+
+.best-score-label {
+  font-size: 0.9rem;
+  color: var(--marvel-gray);
+}
+
+.best-score-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--marvel-red);
+}
+
+.section-title {
+  align-self: flex-start;
+  font-size: 1rem;
+  color: var(--marvel-white);
+  margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.mode-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.mode-btn {
+  background: var(--marvel-black-2);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--marvel-white);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.mode-btn:first-child {
+  grid-column: 1 / -1;
+}
+
+.mode-icon {
+  font-size: 1.8rem;
+}
+
+.mode-btn.active {
+  border-color: var(--marvel-red);
+  background: linear-gradient(160deg, rgba(237, 29, 36, 0.22), var(--marvel-black-2));
+  box-shadow: 0 0 0 1px rgba(237, 29, 36, 0.3) inset;
+}
+
+.mode-btn:active {
+  transform: scale(0.96);
+}
+
+/* ---------- BOUTONS ---------- */
+.btn-primary {
+  width: 100%;
+  padding: 18px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--marvel-white);
+  background: linear-gradient(135deg, var(--marvel-red), var(--marvel-red-dark));
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(237, 29, 36, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 12px rgba(237, 29, 36, 0.3);
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--marvel-gray);
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.btn-secondary:active {
+  transform: scale(0.97);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.voice-warning {
+  margin-top: 18px;
+  text-align: center;
+  color: var(--warning);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------- JEU ---------- */
+.game-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.hud-box {
+  flex: 1;
+  background: var(--marvel-black-2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 10px 6px;
+  text-align: center;
+}
+
+.hud-timer {
+  border-color: rgba(237, 29, 36, 0.4);
+}
+
+.hud-label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--marvel-gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hud-value {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+.hud-timer .hud-value {
+  color: var(--marvel-red);
+}
+
+.hud-timer.time-low .hud-value {
+  animation: pulseRed 0.6s infinite;
+}
+
+@keyframes pulseRed {
+  0%, 100% { color: var(--marvel-red); }
+  50% { color: var(--danger); }
+}
+
+.level-flash {
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(90deg, var(--marvel-red), var(--marvel-red-dark));
+  color: white;
+  font-weight: 800;
+  padding: 10px;
+  border-radius: 12px;
+  margin: 12px 0 0;
+  animation: levelPop 1.4s ease forwards;
+}
+
+@keyframes levelPop {
+  0% { opacity: 0; transform: scale(0.8); }
+  15% { opacity: 1; transform: scale(1.05); }
+  25% { transform: scale(1); }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.mic-zone {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 26px 0 14px;
+}
+
+.btn-mic {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  border: none;
+  background: radial-gradient(circle at 35% 30%, var(--marvel-red), var(--marvel-red-dark));
+  box-shadow: 0 0 0 8px rgba(237, 29, 36, 0.12), 0 10px 30px rgba(237, 29, 36, 0.4);
+  font-size: 3rem;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.btn-mic:active {
+  transform: scale(0.95);
+}
+
+.btn-mic.listening {
+  animation: micPulse 1.1s infinite;
+  background: radial-gradient(circle at 35% 30%, var(--danger), var(--marvel-red-dark));
+}
+
+@keyframes micPulse {
+  0% { box-shadow: 0 0 0 8px rgba(237, 29, 36, 0.18), 0 10px 30px rgba(237, 29, 36, 0.4); }
+  50% { box-shadow: 0 0 0 20px rgba(237, 29, 36, 0.05), 0 10px 30px rgba(237, 29, 36, 0.4); }
+  100% { box-shadow: 0 0 0 8px rgba(237, 29, 36, 0.18), 0 10px 30px rgba(237, 29, 36, 0.4); }
+}
+
+.mic-hint {
+  margin-top: 14px;
+  color: var(--marvel-gray);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.live-transcript {
+  margin-top: 8px;
+  min-height: 20px;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--marvel-white);
+  text-align: center;
+}
+
+.feedback-message {
+  min-height: 30px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+  transition: opacity 0.2s ease;
+}
+
+.feedback-message.ok { color: var(--success); }
+.feedback-message.warn { color: var(--warning); }
+.feedback-message.err { color: var(--danger); }
+
+.found-list-wrap {
+  width: 100%;
+  flex: 1;
+  background: var(--marvel-black-2);
+  border-radius: 16px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 6px;
+}
+
+.found-title {
+  font-size: 0.9rem;
+  color: var(--marvel-gray);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.found-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.found-list li {
+  background: rgba(237, 29, 36, 0.15);
+  border: 1px solid rgba(237, 29, 36, 0.35);
+  color: var(--marvel-white);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  animation: popIn 0.25s ease;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- FIN DE PARTIE ---------- */
+.end-card {
+  width: 100%;
+  margin-top: 12vh;
+  background: var(--marvel-black-2);
+  border: 1px solid rgba(237, 29, 36, 0.35);
+  border-radius: 20px;
+  padding: 28px 22px;
+  text-align: center;
+}
+
+.end-title {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.end-new-record {
+  color: var(--marvel-red);
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.end-stats {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0 26px;
+  gap: 10px;
+}
+
+.end-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.end-stat-value {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--marvel-red);
+}
+
+.end-stat-label {
+  font-size: 0.72rem;
+  color: var(--marvel-gray);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 360px) {
+  .logo-marvel { font-size: 2.2rem; }
+  .btn-mic { width: 110px; height: 110px; font-size: 2.6rem; }
+}
+
+@media (min-height: 800px) {
+  .end-card { margin-top: 18vh; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ================= ÉCRAN MENU ================= -->
+  <section id="screen-menu" class="screen active">
+    <div class="stripe-top"></div>
+
+    <h1 class="logo">
+      <span class="logo-marvel">MARVEL</span>
+      <span class="logo-challenge">CHALLENGE</span>
+    </h1>
+    <p class="tagline">Le quiz vocal des personnages Marvel</p>
+
+    <div class="best-score-box">
+      <span class="best-score-label">🏆 Meilleur score</span>
+      <span id="best-score-value" class="best-score-value">0</span>
+    </div>
+
+    <h2 class="section-title">Choisis ton mode</h2>
+
+    <div class="mode-grid">
+      <button class="mode-btn active" data-mode="all">
+        <span class="mode-icon">🦸</span>
+        <span class="mode-name">Tous les personnages</span>
+      </button>
+      <button class="mode-btn" data-mode="avengers">
+        <span class="mode-icon">🛡️</span>
+        <span class="mode-name">Avengers</span>
+      </button>
+      <button class="mode-btn" data-mode="xmen">
+        <span class="mode-icon">🧬</span>
+        <span class="mode-name">X-Men</span>
+      </button>
+      <button class="mode-btn" data-mode="vilains">
+        <span class="mode-icon">😈</span>
+        <span class="mode-name">Vilains</span>
+      </button>
+      <button class="mode-btn" data-mode="gardiens">
+        <span class="mode-icon">🌌</span>
+        <span class="mode-name">Gardiens de la Galaxie</span>
+      </button>
+    </div>
+
+    <button id="btn-start" class="btn-primary">COMMENCER</button>
+
+    <p id="voice-warning" class="voice-warning hidden">
+      ⚠️ La reconnaissance vocale n'est pas disponible sur ce navigateur. Utilise Chrome sur Android.
+    </p>
+  </section>
+
+  <!-- ================= ÉCRAN JEU ================= -->
+  <section id="screen-game" class="screen">
+    <div class="game-header">
+      <div class="hud-box">
+        <span class="hud-label">Score</span>
+        <span id="hud-score" class="hud-value">0</span>
+      </div>
+      <div class="hud-box">
+        <span class="hud-label">Niveau</span>
+        <span id="hud-level" class="hud-value">1</span>
+      </div>
+      <div class="hud-box hud-timer">
+        <span class="hud-label">Temps</span>
+        <span id="hud-timer" class="hud-value">2:00</span>
+      </div>
+    </div>
+
+    <div id="level-flash" class="level-flash hidden">NIVEAU SUPÉRIEUR !</div>
+
+    <div class="mic-zone">
+      <button id="btn-mic" class="btn-mic">
+        <span id="mic-icon">🎤</span>
+      </button>
+      <p class="mic-hint">Appuie et cite un personnage Marvel</p>
+      <p id="live-transcript" class="live-transcript"></p>
+    </div>
+
+    <div id="feedback-message" class="feedback-message"></div>
+
+    <div class="found-list-wrap">
+      <h3 class="found-title">Personnages trouvés (<span id="found-count">0</span>)</h3>
+      <ul id="found-list" class="found-list"></ul>
+    </div>
+
+    <button id="btn-quit" class="btn-secondary">Abandonner</button>
+  </section>
+
+  <!-- ================= ÉCRAN FIN ================= -->
+  <section id="screen-end" class="screen">
+    <div class="end-card">
+      <h2 class="end-title">⏱️ Temps écoulé !</h2>
+      <p id="end-new-record" class="end-new-record hidden">🏆 Nouveau record !</p>
+
+      <div class="end-stats">
+        <div class="end-stat">
+          <span class="end-stat-value" id="end-score">0</span>
+          <span class="end-stat-label">Score final</span>
+        </div>
+        <div class="end-stat">
+          <span class="end-stat-value" id="end-level">1</span>
+          <span class="end-stat-label">Niveau atteint</span>
+        </div>
+        <div class="end-stat">
+          <span class="end-stat-value" id="end-best">0</span>
+          <span class="end-stat-label">Meilleur score</span>
+        </div>
+      </div>
+
+      <button id="btn-replay" class="btn-primary">REJOUER</button>
+      <button id="btn-menu" class="btn-secondary">Retour au menu</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* =========================================================
+   MARVEL CHALLENGE - Base de données des personnages Marvel
+   Plus de 300 personnages répartis par catégories
+   ========================================================= */
+
+const MARVEL_DATABASE = {
+
+  avengers: [
+    "Iron Man", "Captain America", "Thor", "Hulk", "Black Widow", "Hawkeye",
+    "Vision", "Scarlet Witch", "War Machine", "Falcon", "Winter Soldier",
+    "Ant-Man", "Wasp", "Captain Marvel", "Black Panther", "Doctor Strange",
+    "Quicksilver", "Hercule", "She-Hulk", "Moon Knight", "Luke Cage",
+    "Iron Fist", "Daredevil", "Jessica Jones", "Punisher", "Spectrum",
+    "Wonder Man", "Sentry", "Songbird", "Photon", "Mockingbird",
+    "Union Jack", "Living Lightning", "Tigra", "Stingray"
+  ],
+
+  spiderman: [
+    "Spider-Man", "Miles Morales", "Spider-Gwen", "Spider-Man 2099",
+    "Spider-Woman", "Silk", "Venom", "Carnage", "Green Goblin",
+    "Docteur Octopus", "Vautour", "Sandman", "Electro", "Mysterio",
+    "Rhino", "Scorpion", "Kraven le Chasseur", "Lizard", "Shocker",
+    "Hobgoblin", "Chameleon", "Black Cat", "Jackal", "Tombstone",
+    "Prowler", "Molten Man", "Morbius", "Puma", "Speed Demon",
+    "Scarlet Spider"
+  ],
+
+  xmen: [
+    "Professeur X", "Cyclope", "Jean Grey", "Wolverine", "Tornade",
+    "Malicia", "Diablo", "Iceberg", "Angel", "Gambit", "Jubilee",
+    "Nightcrawler", "Colossus", "Kitty Pryde", "Psylocke", "Cable",
+    "Bishop", "Magneto", "Mystique", "Serval", "Sabretooth", "Juggernaut",
+    "Emma Frost", "Deadpool", "X-23", "Multiple Man", "Havok", "Polaris",
+    "Banshee", "Sunfire", "Dazzler", "Longshot", "Forge", "Cannonball",
+    "Sunspot", "Warpath", "Mirage", "Magik", "Northstar", "Domino",
+    "Shatterstar"
+  ],
+
+  gardiens: [
+    "Star-Lord", "Gamora", "Drax", "Rocket Raccoon", "Groot", "Mantis",
+    "Nebula", "Yondu", "Adam Warlock", "Kraglin", "Cosmo", "Angela",
+    "Moondragon", "Phyla-Vell", "Quasar", "Beta Ray Bill", "Vance Astro",
+    "Martinex"
+  ],
+
+  fantasticfour: [
+    "Mister Fantastic", "Invisible Woman", "Human Torch", "The Thing",
+    "Franklin Richards", "Valeria Richards", "Docteur Fatalis", "Namor",
+    "H.E.R.B.I.E.", "Uatu le Gardien", "Alicia Masters", "Puppet Master",
+    "Klaw", "Diablo Fatal", "Impossible Man"
+  ],
+
+  vilains: [
+    "Thanos", "Loki", "Ultron", "Crâne Rouge", "M.O.D.O.K.", "Baron Zemo",
+    "Kingpin", "Kang le Conquérant", "Ronan l'Accusateur", "Hela",
+    "Killmonger", "Abomination", "Absorbing Man", "Bullseye", "Taskmaster",
+    "Crossbones", "Whiplash", "Justin Hammer", "Aldrich Killian",
+    "Malekith", "Dormammu", "Nightmare", "Mephisto", "Annihilus",
+    "Sinistre", "Stryfe", "Onslaught", "Dark Phoenix", "Sentinelle",
+    "Arcade", "Purple Man", "Owl", "Hammerhead", "Grand Maître",
+    "Corvus Glaive", "Proxima Midnight", "Ebony Maw", "Cull Obsidian",
+    "Blastaar", "Titania", "Ghost", "Arnim Zola", "Baron Mordo",
+    "Enchanteresse", "Executioner", "Grim Reaper", "Batroc", "Constrictor",
+    "Boomerang", "Living Laser"
+  ],
+
+  cosmique: [
+    "Silver Surfer", "Galactus", "Nova", "Eternité", "Tribunal Vivant",
+    "Gladiator", "Ikaris", "Sersi", "Thena", "Makkari", "Gilgamesh",
+    "Sprite", "Phastos", "Druig", "Ajak", "Kro", "Genis-Vell", "Terrax",
+    "Firelord", "Air-Walker", "Stardust", "Charlie-27", "Fenris"
+  ],
+
+  secondaires: [
+    "Ms. Marvel", "Hawkeye Kate Bishop", "Squirrel Girl", "Moon Girl",
+    "Devil Dinosaur", "Wiccan", "Speed", "Hulkling", "Patriot", "Stature",
+    "America Chavez", "Elektra", "Blade", "Ghost Rider", "Cloak", "Dagger",
+    "Werewolf by Night", "Man-Thing", "Howard le Canard", "Shang-Chi",
+    "White Tiger", "Silverclaw", "Darkhawk", "Sleepwalker", "U.S.Agent",
+    "Hyperion", "Blue Marvel", "Justice", "Firestar", "Speedball",
+    "Agent Venom", "Jackpot", "Araña", "Spider-Man Noir", "Spider-Ham",
+    "Spider-Man India", "Web-Slinger", "Silver Sable", "Paladin",
+    "Nick Fury", "Maria Hill", "Phil Coulson", "Sharon Carter",
+    "Peggy Carter", "Yelena Belova", "Riri Williams", "Robbie Reyes",
+    "Frank Castle", "Matt Murdock", "Foggy Nelson", "Karen Page",
+    "Danny Rand", "Colleen Wing", "Misty Knight", "Trish Walker",
+    "Malcolm Ducasse", "Heather Douglas", "Victor Alvarez", "Amadeus Cho",
+    "Sam Wilson", "Doctor Voodoo", "Valkyrie", "Korg", "Miek",
+    "Warlock Jeune", "Nico Minoru", "Karolina Dean", "Chase Stein",
+    "Molly Hayes", "Gertrude Yorkes", "Alex Wilder", "Victor Mancha",
+    "Old Lace", "Machine Man", "Darkstar", "Vindicator", "Guardian",
+    "Sasquatch", "Aurora", "Shaman", "Snowbird", "Puck", "Talisman",
+    "Diamondback", "Paladin le Mercenaire", "Silverclaw Junior",
+    "Rage", "Darkdevil", "Anti-Venom", "Toxin", "Hybrid", "Scream",
+    "Lasher", "Riot", "Phage", "Agony", "Sleeper", "Bora", "Marrow",
+    "Maggott", "Chamber", "Skin", "Thunderbird", "Feral"
+  ]
+};
+
+// Regroupe tous les personnages dans un seul tableau pour le mode "Tous"
+MARVEL_DATABASE.all = [].concat(
+  MARVEL_DATABASE.avengers,
+  MARVEL_DATABASE.spiderman,
+  MARVEL_DATABASE.xmen,
+  MARVEL_DATABASE.gardiens,
+  MARVEL_DATABASE.fantasticfour,
+  MARVEL_DATABASE.vilains,
+  MARVEL_DATABASE.cosmique,
+  MARVEL_DATABASE.secondaires
+);
+
+// Rend la base disponible globalement pour script.js
+window.MARVEL_DATABASE = MARVEL_DATABASE;
+
+</script>
+<script>
+/* =========================================================
+   MARVEL CHALLENGE - script.js
+   Logique du jeu : reconnaissance vocale, score, niveaux,
+   chronomètre, synthèse vocale, sauvegarde du meilleur score
+   ========================================================= */
+
+(function () {
+  "use strict";
+
+  /* ---------- CONSTANTES ---------- */
+  const GAME_DURATION = 120; // 2 minutes en secondes
+  const LEVEL_UP_EVERY = 10; // niveau supérieur tous les 10 personnages
+  const STORAGE_KEY = "marvelChallenge_bestScore";
+
+  /* ---------- ÉTAT DU JEU ---------- */
+  let currentMode = "all";
+  let characterPool = [];       // tableau des noms disponibles pour le mode choisi
+  let normalizedPool = new Map(); // normalisé -> nom original
+  let foundCharacters = new Set(); // noms originaux déjà trouvés
+  let score = 0;
+  let level = 1;
+  let timeLeft = GAME_DURATION;
+  let timerInterval = null;
+  let recognition = null;
+  let isListening = false;
+
+  /* ---------- ÉLÉMENTS DOM ---------- */
+  const screens = {
+    menu: document.getElementById("screen-menu"),
+    game: document.getElementById("screen-game"),
+    end: document.getElementById("screen-end"),
+  };
+
+  const bestScoreValueEl = document.getElementById("best-score-value");
+  const modeButtons = document.querySelectorAll(".mode-btn");
+  const btnStart = document.getElementById("btn-start");
+  const voiceWarning = document.getElementById("voice-warning");
+
+  const hudScore = document.getElementById("hud-score");
+  const hudLevel = document.getElementById("hud-level");
+  const hudTimer = document.getElementById("hud-timer");
+  const hudTimerBox = hudTimer.closest(".hud-timer");
+  const levelFlash = document.getElementById("level-flash");
+
+  const btnMic = document.getElementById("btn-mic");
+  const micIcon = document.getElementById("mic-icon");
+  const liveTranscript = document.getElementById("live-transcript");
+  const feedbackMessage = document.getElementById("feedback-message");
+
+  const foundListEl = document.getElementById("found-list");
+  const foundCountEl = document.getElementById("found-count");
+  const btnQuit = document.getElementById("btn-quit");
+
+  const endScore = document.getElementById("end-score");
+  const endLevel = document.getElementById("end-level");
+  const endBest = document.getElementById("end-best");
+  const endNewRecord = document.getElementById("end-new-record");
+  const btnReplay = document.getElementById("btn-replay");
+  const btnMenu = document.getElementById("btn-menu");
+
+  /* ---------- NAVIGATION ENTRE ÉCRANS ---------- */
+  function showScreen(name) {
+    Object.values(screens).forEach((el) => el.classList.remove("active"));
+    screens[name].classList.add("active");
+  }
+
+  /* ---------- OUTILS DE NORMALISATION ---------- */
+  function normalize(str) {
+    return str
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") // enlève les accents
+      .replace(/[^a-z0-9]/g, "");      // enlève espaces, tirets, points, apostrophes
+  }
+
+  function buildPool(mode) {
+    const data = window.MARVEL_DATABASE || {};
+    const list = data[mode] || data.all || [];
+    characterPool = list;
+    normalizedPool = new Map();
+    list.forEach((name) => normalizedPool.set(normalize(name), name));
+  }
+
+  /* ---------- MEILLEUR SCORE (localStorage) ---------- */
+  function getBestScore() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? parseInt(raw, 10) || 0 : 0;
+  }
+
+  function setBestScore(value) {
+    localStorage.setItem(STORAGE_KEY, String(value));
+  }
+
+  function refreshBestScoreDisplay() {
+    bestScoreValueEl.textContent = getBestScore();
+  }
+
+  /* ---------- SYNTHÈSE VOCALE ---------- */
+  function speak(text) {
+    if (!("speechSynthesis" in window)) return;
+    try {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "fr-FR";
+      utterance.rate = 1.05;
+      utterance.pitch = 1.0;
+      window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      /* silencieux si la synthèse échoue */
+    }
+  }
+
+  /* ---------- SÉLECTION DU MODE (MENU) ---------- */
+  modeButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      modeButtons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentMode = btn.dataset.mode;
+    });
+  });
+
+  /* ---------- RECONNAISSANCE VOCALE (Web Speech API) ---------- */
+  const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  function setupRecognition() {
+    if (!SpeechRecognitionAPI) return null;
+    const rec = new SpeechRecognitionAPI();
+    rec.lang = "fr-FR";
+    rec.continuous = false;
+    rec.interimResults = true;
+    rec.maxAlternatives = 3;
+
+    rec.onstart = () => {
+      isListening = true;
+      btnMic.classList.add("listening");
+      micIcon.textContent = "🔴";
+      liveTranscript.textContent = "Je t'écoute...";
+    };
+
+    rec.onresult = (event) => {
+      let finalText = "";
+      let interimText = "";
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcriptPart = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalText += transcriptPart;
+        } else {
+          interimText += transcriptPart;
+        }
+      }
+      liveTranscript.textContent = finalText || interimText;
+      if (finalText) {
+        handleSpokenCharacter(finalText);
+      }
+    };
+
+    rec.onerror = () => {
+      stopListeningUI();
+      showFeedback("⚠️ Erreur micro, réessaie", "warn");
+    };
+
+    rec.onend = () => {
+      stopListeningUI();
+    };
+
+    return rec;
+  }
+
+  function stopListeningUI() {
+    isListening = false;
+    btnMic.classList.remove("listening");
+    micIcon.textContent = "🎤";
+  }
+
+  btnMic.addEventListener("click", () => {
+    if (!recognition) {
+      showFeedback("⚠️ Reconnaissance vocale indisponible", "warn");
+      return;
+    }
+    if (isListening) {
+      recognition.stop();
+      return;
+    }
+    liveTranscript.textContent = "";
+    try {
+      recognition.start();
+    } catch (e) {
+      // évite l'erreur "already started"
+    }
+  });
+
+  /* ---------- TRAITEMENT D'UN PERSONNAGE PRONONCÉ ---------- */
+  function handleSpokenCharacter(rawText) {
+    const cleaned = normalize(rawText);
+    if (!cleaned) return;
+
+    // Cherche une correspondance exacte, sinon une correspondance partielle
+    let matchedName = normalizedPool.get(cleaned);
+
+    if (!matchedName) {
+      for (const [norm, original] of normalizedPool) {
+        if (cleaned.includes(norm) || norm.includes(cleaned)) {
+          matchedName = original;
+          break;
+        }
+      }
+    }
+
+    if (!matchedName) {
+      showFeedback("⚠️ Personnage inconnu", "warn");
+      speak("Personnage inconnu");
+      return;
+    }
+
+    if (foundCharacters.has(matchedName)) {
+      showFeedback("❌ Déjà cité !", "err");
+      speak("Déjà cité");
+      return;
+    }
+
+    // Nouveau personnage valide
+    foundCharacters.add(matchedName);
+    score += 1;
+    addCharacterToList(matchedName);
+    updateHud();
+    showFeedback("✅ Bravo ! " + matchedName, "ok");
+    speak("Bravo");
+    checkLevelUp();
+  }
+
+  function showFeedback(text, type) {
+    feedbackMessage.textContent = text;
+    feedbackMessage.className = "feedback-message " + type;
+  }
+
+  function addCharacterToList(name) {
+    const li = document.createElement("li");
+    li.textContent = name;
+    foundListEl.prepend(li);
+    foundCountEl.textContent = foundCharacters.size;
+  }
+
+  function checkLevelUp() {
+    const newLevel = Math.floor(foundCharacters.size / LEVEL_UP_EVERY) + 1;
+    if (newLevel > level) {
+      level = newLevel;
+      hudLevel.textContent = level;
+      levelFlash.classList.remove("hidden");
+      // relance l'animation
+      levelFlash.style.animation = "none";
+      void levelFlash.offsetWidth;
+      levelFlash.style.animation = "";
+      setTimeout(() => levelFlash.classList.add("hidden"), 1400);
+    }
+  }
+
+  function updateHud() {
+    hudScore.textContent = score;
+    hudLevel.textContent = level;
+  }
+
+  /* ---------- CHRONOMÈTRE ---------- */
+  function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return m + ":" + String(s).padStart(2, "0");
+  }
+
+  function startTimer() {
+    timeLeft = GAME_DURATION;
+    hudTimer.textContent = formatTime(timeLeft);
+    hudTimerBox.classList.remove("time-low");
+
+    timerInterval = setInterval(() => {
+      timeLeft -= 1;
+      hudTimer.textContent = formatTime(timeLeft);
+      if (timeLeft <= 20) {
+        hudTimerBox.classList.add("time-low");
+      }
+      if (timeLeft <= 0) {
+        endGame();
+      }
+    }, 1000);
+  }
+
+  function stopTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+  }
+
+  /* ---------- DÉMARRAGE / FIN DE PARTIE ---------- */
+  function startGame() {
+    buildPool(currentMode);
+    foundCharacters = new Set();
+    score = 0;
+    level = 1;
+    foundListEl.innerHTML = "";
+    foundCountEl.textContent = "0";
+    feedbackMessage.textContent = "";
+    liveTranscript.textContent = "";
+    updateHud();
+    showScreen("game");
+    startTimer();
+  }
+
+  function endGame() {
+    stopTimer();
+    if (isListening && recognition) {
+      recognition.stop();
+    }
+
+    const best = getBestScore();
+    const isNewRecord = score > best;
+    if (isNewRecord) {
+      setBestScore(score);
+    }
+
+    endScore.textContent = score;
+    endLevel.textContent = level;
+    endBest.textContent = getBestScore();
+    endNewRecord.classList.toggle("hidden", !isNewRecord);
+
+    refreshBestScoreDisplay();
+    showScreen("end");
+  }
+
+  function quitGame() {
+    stopTimer();
+    if (isListening && recognition) {
+      recognition.stop();
+    }
+    refreshBestScoreDisplay();
+    showScreen("menu");
+  }
+
+  /* ---------- ÉVÉNEMENTS BOUTONS ---------- */
+  btnStart.addEventListener("click", startGame);
+  btnQuit.addEventListener("click", quitGame);
+  btnReplay.addEventListener("click", startGame);
+  btnMenu.addEventListener("click", () => showScreen("menu"));
+
+  /* ---------- INITIALISATION ---------- */
+  function init() {
+    refreshBestScoreDisplay();
+
+    if (!SpeechRecognitionAPI) {
+      voiceWarning.classList.remove("hidden");
+      btnMic.disabled = true;
+    } else {
+      recognition = setupRecognition();
+    }
+
+    showScreen("menu");
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+})();
+
+</script>
+</body>
+</html>
