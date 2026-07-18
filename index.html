@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#ed1d24">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Marvel Challenge">
+<title>MARVEL CHALLENGE</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ================= ÉCRAN MENU ================= -->
+  <section id="screen-menu" class="screen active">
+    <div class="stripe-top"></div>
+
+    <h1 class="logo">
+      <span class="logo-marvel">MARVEL</span>
+      <span class="logo-challenge">CHALLENGE</span>
+    </h1>
+    <p class="tagline">Le quiz vocal des personnages Marvel</p>
+
+    <div class="best-score-box">
+      <span class="best-score-label">🏆 Meilleur score</span>
+      <span id="best-score-value" class="best-score-value">0</span>
+    </div>
+
+    <h2 class="section-title">Choisis ton mode</h2>
+
+    <div class="mode-grid">
+      <button class="mode-btn active" data-mode="all">
+        <span class="mode-icon">🦸</span>
+        <span class="mode-name">Tous les personnages</span>
+      </button>
+      <button class="mode-btn" data-mode="avengers">
+        <span class="mode-icon">🛡️</span>
+        <span class="mode-name">Avengers</span>
+      </button>
+      <button class="mode-btn" data-mode="xmen">
+        <span class="mode-icon">🧬</span>
+        <span class="mode-name">X-Men</span>
+      </button>
+      <button class="mode-btn" data-mode="vilains">
+        <span class="mode-icon">😈</span>
+        <span class="mode-name">Vilains</span>
+      </button>
+      <button class="mode-btn" data-mode="gardiens">
+        <span class="mode-icon">🌌</span>
+        <span class="mode-name">Gardiens de la Galaxie</span>
+      </button>
+    </div>
+
+    <button id="btn-start" class="btn-primary">COMMENCER</button>
+
+    <p id="voice-warning" class="voice-warning hidden">
+      ⚠️ La reconnaissance vocale n'est pas disponible sur ce navigateur. Utilise Chrome sur Android.
+    </p>
+  </section>
+
+  <!-- ================= ÉCRAN JEU ================= -->
+  <section id="screen-game" class="screen">
+    <div class="game-header">
+      <div class="hud-box">
+        <span class="hud-label">Score</span>
+        <span id="hud-score" class="hud-value">0</span>
+      </div>
+      <div class="hud-box">
+        <span class="hud-label">Niveau</span>
+        <span id="hud-level" class="hud-value">1</span>
+      </div>
+      <div class="hud-box hud-timer">
+        <span class="hud-label">Temps</span>
+        <span id="hud-timer" class="hud-value">2:00</span>
+      </div>
+    </div>
+
+    <div id="level-flash" class="level-flash hidden">NIVEAU SUPÉRIEUR !</div>
+
+    <div class="mic-zone">
+      <button id="btn-mic" class="btn-mic">
+        <span id="mic-icon">🎤</span>
+      </button>
+      <p class="mic-hint">Appuie et cite un personnage Marvel</p>
+      <p id="live-transcript" class="live-transcript"></p>
+    </div>
+
+    <div id="feedback-message" class="feedback-message"></div>
+
+    <div class="found-list-wrap">
+      <h3 class="found-title">Personnages trouvés (<span id="found-count">0</span>)</h3>
+      <ul id="found-list" class="found-list"></ul>
+    </div>
+
+    <button id="btn-quit" class="btn-secondary">Abandonner</button>
+  </section>
+
+  <!-- ================= ÉCRAN FIN ================= -->
+  <section id="screen-end" class="screen">
+    <div class="end-card">
+      <h2 class="end-title">⏱️ Temps écoulé !</h2>
+      <p id="end-new-record" class="end-new-record hidden">🏆 Nouveau record !</p>
+
+      <div class="end-stats">
+        <div class="end-stat">
+          <span class="end-stat-value" id="end-score">0</span>
+          <span class="end-stat-label">Score final</span>
+        </div>
+        <div class="end-stat">
+          <span class="end-stat-value" id="end-level">1</span>
+          <span class="end-stat-label">Niveau atteint</span>
+        </div>
+        <div class="end-stat">
+          <span class="end-stat-value" id="end-best">0</span>
+          <span class="end-stat-label">Meilleur score</span>
+        </div>
+      </div>
+
+      <button id="btn-replay" class="btn-primary">REJOUER</button>
+      <button id="btn-menu" class="btn-secondary">Retour au menu</button>
+    </div>
+  </section>
+
+</div>
+
+<script src="marvel.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
